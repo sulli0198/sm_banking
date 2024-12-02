@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../banking app resourses/assets/tailwind.config.ts"],
+  "include": ["types", "src", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../banking app resourses/assets/tailwind.config.ts"],
   "exclude": ["node_modules"]
 }
