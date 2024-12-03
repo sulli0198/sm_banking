@@ -380,3 +380,27 @@
     @apply text-16 font-semibold text-black-2 max-xl:hidden;
   }
 }
+
+body {
+  background-color: #2c2c2c; /* Dark grey background */
+  color: white; /* Default text color to white */
+}
+
+/* Specific classes that need to be white */
+.header-box-title {
+  @apply text-white; /* Change header box title to white */
+}
+
+.header-box-subtext {
+  @apply text-white; /* Change header box subtext to white */
+}
+
+/* Ensure other text elements are also white */
+.footer_name,
+.footer_email,
+.footer_name-mobile,
+.footer_email-mobile {
+  @apply text-white; /* Change footer text to white */
+}
+
+/* Add any other specific classes that need to be white */
