@@ -17,7 +17,7 @@ const HeaderBox = ({ type = "title", title, subtext, user }: HeaderBoxProps) => 
       <TotalBalanceBox 
       accounts = {[]}
       totalBanks = {1}
-      totalCurrentBalance = {1255.32}
+      totalCurrentBalance = {125532.32}
       />
     </div>
   );

@@ -11,13 +11,26 @@ const DoughnutCart = ({accounts} : DoughnutChartProps ) => {
       {
       label:'Banks',
       data: [1250, 2222, 3327],
-      backgroundColor: ['#0747b6','#2265d8','#2f91fa'],
+      backgroundColor: ['#00e9ff','#08a0d7','#0067b1'],
+      borderWidth: 0, 
       }
     ],
       labels: ['bank 1','bank 2','bank 3']
     }
     
-    return <Doughnut data={data} />
+    const options = {
+      cutout: '60%',
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    };
+    
+    return <Doughnut 
+    data={data}
+    options={options}
+    />
   }
   
 
