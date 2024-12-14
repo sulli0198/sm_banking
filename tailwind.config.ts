@@ -20,6 +20,7 @@ const config = {
     },
     extend: {
       colors: {
+        customGray: 'rgb(44, 44, 44)',
         fill: {
           1: "rgba(255, 255, 255, 0.10)",
         },
