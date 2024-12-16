@@ -25,6 +25,7 @@ const config = {
           1: "rgba(255, 255, 255, 0.10)",
         },
         bankGradient: "#00e9ff",
+        darkbankGradient : "#0067b1", 
         indigo: {
           500: "#6172F3",
           700: "#3538CD",

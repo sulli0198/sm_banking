@@ -20,7 +20,7 @@ const ibmPlexSerif = IBM_Plex_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Cash Catastrophe",
+  title: "CashOrbit",
   description: "It is like having your personal accountant... ",
   icons: {
     icon: '/icons/icon.svg',
