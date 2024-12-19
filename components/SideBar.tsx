@@ -13,7 +13,7 @@ const SideBar = ({ user }: SiderbarProps) => {
     <section className='sidebar' >
       <nav className='flex flex-col gap-4' >
         <Link href="/"
-         className='mb-12 cursor-pointer items-center gap-2'>
+         className='mb-12 flex cursor-pointer items-center gap-2'>
           <Image 
           src="icons/logo.svg"
           width={34}
@@ -47,14 +47,16 @@ const SideBar = ({ user }: SiderbarProps) => {
             </div>
             <p className={cn
               ('sidebar-label', 
-                {'!text-white': isActive
+                {'!text-darkbankGradient': isActive
               })}>
               {item.label}
             </p>
           </Link>
           )
           })}
+          User
       </nav>
+          Footer
     </section>
   )
 }
