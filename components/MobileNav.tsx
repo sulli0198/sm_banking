@@ -2,6 +2,7 @@
 import React from 'react'
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -33,20 +34,21 @@ const MobileNav = ({user} : MobileNavProps ) => {
             <path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
           </svg>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent  className='sheet-background border-none ' >
           <Link href="/"
-         className='mb-12 flex cursor-pointer items-center gap-2'>
+         className='flex cursor-pointer items-center gap-1 px-4'>
           <Image 
           src="icons/logo.svg"
           width={34}
           height={34}
           alt='logo'
-          className='size-[24px] max-xl:size-14'
            />
-           <h1 className='sidebar-logo' >CashOrbit</h1>
+           <h1 className='text-20 font-ibm-plex-serif font-bold' >CashOrbit</h1>
         </Link>
-
-        {sidebarLinks.map((item) => {
+        <div className='mobilenav-sheet' >
+          <SheetClose asChild>
+            <nav className='flex h-full flex-col gap-6 pt-16 text-white'>
+            {sidebarLinks.map((item) => {
           const isActive = 
           pathname === item.route || pathname.startsWith(`${item.route}/`);
           return(
@@ -76,6 +78,11 @@ const MobileNav = ({user} : MobileNavProps ) => {
           </Link>
           )
           })}
+            </nav>
+          </SheetClose>
+        </div>
+
+        
           </SheetContent>
         </Sheet>    
     </section>
