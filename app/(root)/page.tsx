@@ -4,7 +4,8 @@ import RightSidebar from '@/components/ui/RightSidebar'
 
 const Home = () => {
 
-   const loggedin = {firstname : "Salman"}
+   const loggedin = {firstName : "Salman",
+    lastName : "ibrahim", email : 'salmanibrahim521@gmail.com'}
    
   return (
     <section className="home">
@@ -13,7 +14,7 @@ const Home = () => {
           <HeaderBox 
             type="welcome"
             title='Greetings'
-            user={loggedin?.firstname || "Guest"}
+            user={loggedin?.firstName || "Guest"}
             subtext = "Access and view your account and transactions"
           />
         </header>
