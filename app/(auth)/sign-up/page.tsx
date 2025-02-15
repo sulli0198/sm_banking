@@ -1,13 +1,15 @@
+import AuthForm from '@/components/ui/AuthForm';
 import React from 'react'
 
 const SignUp = () => {
   return (
-    <div>
-      Sign Up Page
-    </div>
+    <section className='flex-center size-full max-sm:px-6'>
+      <AuthForm type="sign-un" />
+    </section>
   );
-};
+}; 
 
-export default function Page() {
+// Change to Next.js page format
+export default function Page() { 
   return <SignUp />;
 }
