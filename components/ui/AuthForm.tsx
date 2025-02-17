@@ -5,6 +5,18 @@ import React, { useState } from 'react'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Divide } from 'lucide-react';
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -34,7 +46,7 @@ const AuthForm = ({ type }: { type: string }) => {
 
   return (
     <section className='auth-form'>
-      <header className='flex flex-bold gap-5 md:gap-8'>
+      <header className='flex flex-col gap-5 md:gap-8'>
       <Link href="/"
          className='flex cursor-pointer items-center gap-1'>
           <Image 
@@ -69,7 +81,22 @@ const AuthForm = ({ type }: { type: string }) => {
         ):
         (
           <>
-          FORM
+           <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <div className='form-item'>
+                    <FormLabel>
+                      Email
+                    </FormLabel>
+                  </div>
+                )}
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          </Form>
           </>
         )
         }
