@@ -17,27 +17,25 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Divide } from 'lucide-react';
+import { authFormSchema } from '@/lib/utils';
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+
 
 
 const AuthForm = ({ type }: { type: string }) => {
   const {user, setUser} = useState(null)
 
    // 1. Define your form.
-   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+   const form = useForm<z.infer<typeof authFormSchema>>({
+    resolver: zodResolver(authFormSchema),
     defaultValues: {
-      username: "",
+      email: "",
+      passwored: "",
     },
   })
  
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof authFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values) 
@@ -88,9 +86,46 @@ const AuthForm = ({ type }: { type: string }) => {
                 name="email"
                 render={({ field }) => (
                   <div className='form-item'>
-                    <FormLabel>
+                    <FormLabel className='form lable'>
                       Email
                     </FormLabel>
+                    <div className='flex w-full flex-col'>
+                     <FormControl>
+                       <input 
+                       placeholder='Enter your email'
+                       className='input-class'
+                       {...field}
+                       />
+                     </FormControl>
+                     <FormMessage className='form-message  mt-2'>
+                       
+                     </FormMessage>
+                    </div>
+                  </div>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <div className='form-item'>
+                    <FormLabel className='form lable'>
+                      Password
+                    </FormLabel>
+                    <div className='flex w-full flex-col'>
+                     <FormControl>
+                       <input 
+                       placeholder='Enter your password'
+                       className='input-class'
+                       type='password'
+                       {...field}
+                       />
+                     </FormControl>
+                     <FormMessage className='form-message  mt-2'>
+                       
+                     </FormMessage>
+                    </div>
                   </div>
                 )}
               />
