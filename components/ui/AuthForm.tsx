@@ -23,19 +23,19 @@ import { authFormSchema } from '@/lib/utils';
 
 
 const AuthForm = ({ type }: { type: string }) => {
-  const {user, setUser} = useState(null)
+  const [user, setUser] = useState(null)
 
    // 1. Define your form.
-   const form = useForm<z.infer<typeof authFormSchema>>({
-    resolver: zodResolver(authFormSchema),
+   const form = useForm<z.infer<ReturnType<typeof authFormSchema>>>({
+    resolver: zodResolver(authFormSchema(type)),
     defaultValues: {
       email: "",
-      passwored: "",
+      password: "",
     },
   })
  
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof authFormSchema>) {
+  function onSubmit(values: z.infer<ReturnType<typeof authFormSchema>>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values) 
