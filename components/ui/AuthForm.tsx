@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Divide } from 'lucide-react';
 import { authFormSchema } from '@/lib/utils';
+import CustomInput from './CustomInput';
 
 
 
@@ -81,54 +82,20 @@ const AuthForm = ({ type }: { type: string }) => {
           <>
            <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <div className='form-item'>
-                    <FormLabel className='form lable'>
-                      Email
-                    </FormLabel>
-                    <div className='flex w-full flex-col'>
-                     <FormControl>
-                       <input 
-                       placeholder='Enter your email'
-                       className='input-class'
-                       {...field}
-                       />
-                     </FormControl>
-                     <FormMessage className='form-message  mt-2'>
-                       
-                     </FormMessage>
-                    </div>
-                  </div>
-                )}
+              <CustomInput 
+              control = {form.control} 
+              name = 'Username' 
+              label = "Username" 
+              placeholder = 'Enter your user name'
+              />
+              <CustomInput 
+              control = {form.control} 
+              name = 'password' 
+              label = "Password" 
+              placeholder = 'Enter your password'
               />
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <div className='form-item'>
-                    <FormLabel className='form lable'>
-                      Password
-                    </FormLabel>
-                    <div className='flex w-full flex-col'>
-                     <FormControl>
-                       <input 
-                       placeholder='Enter your password'
-                       className='input-class'
-                       type='password'
-                       {...field}
-                       />
-                     </FormControl>
-                     <FormMessage className='form-message  mt-2'>
-                       
-                     </FormMessage>
-                    </div>
-                  </div>
-                )}
-              />
+
               <Button type="submit">Submit</Button>
             </form>
           </Form>

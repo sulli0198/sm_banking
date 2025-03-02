@@ -1,20 +1,27 @@
 'use client';
 import React from 'react'
 import {
-    Form,
     FormControl,
-    FormDescription,
     FormField,
-    FormItem,
     FormLabel,
     FormMessage,
   } from "@/components/ui/form"
+  import {Control, Form} from 'react-hook-form'
+import { z } from 'zod';
+import { authFormSchema } from '@/lib/utils';
 
-const Custominput = ({ form, name, label, placeholder }) => {
+  interface CustomInput {
+    form: Control<z.infer<ReturnType<typeof authFormSchema>>>,
+    name: string,
+    label: string,
+    placeholder: string,
+  }
+
+const CustomInput = ({ control, name, label, placeholder}: CustomInput) => {
   return (
     <div>
       <FormField
-                control={form.control}
+                control={control}
                 name={name}
                 render={({ field }) => (
                   <div className='form-item'>
@@ -40,4 +47,4 @@ const Custominput = ({ form, name, label, placeholder }) => {
   )
 }
 
-export default Custominput
+export default CustomInput
