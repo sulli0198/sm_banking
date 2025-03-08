@@ -6,13 +6,13 @@ import {
     FormLabel,
     FormMessage,
   } from "@/components/ui/form"
-  import {Control, Form} from 'react-hook-form'
+  import {Control, FieldPath, Form} from 'react-hook-form'
 import { z } from 'zod';
 import { authFormSchema } from '@/lib/utils';
 
   interface CustomInput {
-    form: Control<z.infer<ReturnType<typeof authFormSchema>>>,
-    name: string,
+    control: Control<z.infer<ReturnType<typeof authFormSchema>>>,
+    name: FieldPath<z.infer<ReturnType<typeof authFormSchema>>>,
     label: string,
     placeholder: string,
   }
@@ -33,6 +33,7 @@ const CustomInput = ({ control, name, label, placeholder}: CustomInput) => {
                        <input 
                        placeholder={placeholder}
                        className='input-class'
+                       type={name === 'password' ? 'password' : 'text'}
                        {...field}
                        />
                      </FormControl>

@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Divide } from 'lucide-react';
+import { Divide, Loader2 } from 'lucide-react';
 import { authFormSchema } from '@/lib/utils';
 import CustomInput from './CustomInput';
 
@@ -25,6 +25,8 @@ import CustomInput from './CustomInput';
 
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState(null)
+  const [isLoading, setisLoading] = useState(false)
+
 
    // 1. Define your form.
    const form = useForm<z.infer<ReturnType<typeof authFormSchema>>>({
@@ -39,7 +41,9 @@ const AuthForm = ({ type }: { type: string }) => {
   function onSubmit(values: z.infer<ReturnType<typeof authFormSchema>>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    setisLoading(true)
     console.log(values) 
+    setisLoading(false);
   }
 
 
@@ -83,10 +87,10 @@ const AuthForm = ({ type }: { type: string }) => {
            <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <CustomInput 
-              control = {form.control} 
-              name = 'Username' 
-              label = "Username" 
-              placeholder = 'Enter your user name'
+              control={form.control} 
+              name='email' 
+              label="Email" 
+              placeholder='Enter your email'
               />
               <CustomInput 
               control = {form.control} 
@@ -96,7 +100,14 @@ const AuthForm = ({ type }: { type: string }) => {
               />
 
 
-              <Button type="submit">Submit</Button>
+              <Button className='form-btn' type="submit">
+                { isLoading ? (
+                  <>
+                  <Loader2 size = {20} className='animate-spin' /> &nbsp;
+                  Loading...
+                  </>
+                ): type === 'sign-in' ? 'Sign In' : 'Sign Up' }
+              </Button>
             </form>
           </Form>
           </>
