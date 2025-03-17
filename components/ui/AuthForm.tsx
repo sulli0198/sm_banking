@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input"
 import { Divide, Link2, Loader2 } from 'lucide-react';
 import { authFormSchema } from '@/lib/utils';
 import CustomInput from './CustomInput';
-import { signIn } from '@/lib/actions/user.actions';
+import { signIn, signUp } from '@/lib/actions/user.actions';
 import { useRouter } from 'next/navigation';
 
 
@@ -37,20 +37,9 @@ const AuthForm = ({ type }: { type: string }) => {
    // 1. Define your form.
    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: type === 'sign-in' ? {
+    defaultValues: {
       email: "",
       password: "",
-    } : {
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      address1: "",
-      city: "",
-      state: "",
-      postalCode: "",
-      dateOfBirth: "",
-      ssn: ""
     },
   })
  
@@ -61,17 +50,17 @@ const AuthForm = ({ type }: { type: string }) => {
     try {
       // sign up with appwrite & create plain link token
       if(type === 'sign-up'){
-        // const newUser= await signUp(data);
-        // setUser(newUser)
+        const newUser= await signUp(data);
+        setUser(newUser)
       }
 
       if(type === 'sign-in') {
-        // const response = await signIn({
-        //   email: data.email,
-        //   password: data.password,
-        // })
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        })
 
-        // if(response) router.push('/')
+        if(response) router.push('/')
       }
 
     } catch (error) {
