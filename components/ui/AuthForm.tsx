@@ -19,11 +19,14 @@ import { Input } from "@/components/ui/input"
 import { Divide, Link2, Loader2 } from 'lucide-react';
 import { authFormSchema } from '@/lib/utils';
 import CustomInput from './Custominput';
+import { useRouter } from 'next/navigation';
+import { signIn, signUp } from '@/lib/actions/user.actions';
 
 
 
 
 const AuthForm = ({ type }: { type: string }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null)
   const [isLoading, setisLoading] = useState(false)
 
@@ -33,19 +36,52 @@ const AuthForm = ({ type }: { type: string }) => {
    // 1. Define your form.
    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: type === 'sign-up' ? {
+      firstName: "",
+      lastName: "",
+      address1: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      dateOfBirth: "",
+      ssn: "",
+      email: "",
+      password: "",
+    } : {
       email: "",
       password: "",
     },
   })
  
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+ 
     setisLoading(true)
-    console.log(values) 
+    try{
+      // sign up on appwrite and create plaid link token
+
+      if(type === 'sign-up'){
+        const newUser = await signUp(data);
+
+        setUser(newUser);
+      }
+
+      if(type === 'sign-in'){
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+
+        if(response) router.push('/')
+      }
+
+      console.log(values) 
     setisLoading(false);
+    }catch(error){
+      console.log(error)
+    }finally{
+      setisLoading(false);
+    }
   }
 
 
@@ -87,7 +123,13 @@ const AuthForm = ({ type }: { type: string }) => {
         (
           <>
            <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form 
+              onSubmit={(e) => {
+                console.log('Form submitted')
+                form.handleSubmit(onSubmit)(e)
+              }} 
+              className="space-y-8"
+            >
               {type === 'sign-up' && (
                 <>
                 <div className='flex gap-4'>
@@ -110,6 +152,12 @@ const AuthForm = ({ type }: { type: string }) => {
                   name='address1' 
                   label="Address" 
                   placeholder='Enter your address'
+                  />
+                  <CustomInput 
+                  control={form.control} 
+                  name='city' 
+                  label="City" 
+                  placeholder='Enter your city'
                   />
                   <div className='flex gap-4'>
                   <CustomInput 
