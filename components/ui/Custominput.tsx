@@ -39,7 +39,7 @@ const CustomInput = ({ control, name, label, placeholder}: CustomInput) => {
                        {...field}
                        />
                      </FormControl>
-                     <FormMessage className='form-message mt-2'>
+                     <FormMessage className='form-message  mt-2'>
                        
                      </FormMessage>
                     </div>
