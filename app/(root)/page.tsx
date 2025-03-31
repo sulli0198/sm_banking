@@ -1,11 +1,11 @@
 import HeaderBox from '@/components/ui/HeaderBox'
 import React from 'react'
 import RightSidebar from '@/components/ui/RightSidebar'
+import { getLoggedInUser } from '@/lib/actions/user.actions'
 
-const Home = () => {
+const Home = async() => {
 
-   const loggedin = {firstName : "Salman",
-    lastName : "ibrahim", email : 'salmanibrahim521@gmail.com'}
+   const loggedin = await getLoggedInUser();
    
   return (
     <section className="home">
@@ -14,7 +14,7 @@ const Home = () => {
           <HeaderBox 
             type="welcome"
             title='Greetings'
-            user={loggedin?.firstName || "Guest"}
+            user={loggedin?.name || "Guest"}
             subtext = "Access and view your account and transactions"
           />
         </header>
