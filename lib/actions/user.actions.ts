@@ -60,4 +60,18 @@ export async function getLoggedInUser() {
       return null;
     }
   }
+
+
+  export const logoutAccount = async () => {
+    try {
+      const { account } = await createSessionClient();
+      await account.deleteSession("current"); // Deletes the current user's session
+      cookies().delete("appwrite-session"); // Ensure "appwrite-session" is your correct cookie name
+  
+      return parseStringify(true);
+    } catch (error) {
+      console.error("Logout Error:", error); // Server-side error logging
+      return null; // Indicate failure
+    }
+  };
   
