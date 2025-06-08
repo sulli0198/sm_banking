@@ -21,11 +21,12 @@ import { authFormSchema } from '@/lib/utils';
 import CustomInput from './Custominput';
 import { useRouter } from 'next/navigation';
 import { signIn, signUp } from '@/lib/actions/user.actions';
+import PlaidLink from './PlaidLink';
 
 
 
 
-const AuthForm = ({ type }: { type: string }) => {
+const AuthForm = ({ type }: { type: string }) => {  
   const router = useRouter();
   const [user, setUser] = useState(null)
   const [isLoading, setisLoading] = useState(false)
@@ -115,12 +116,12 @@ const AuthForm = ({ type }: { type: string }) => {
           </h1>
         </div>
       </header>
-        {user ? (
+        {/* {user ? ( */}
           <div className='flex flex-col gap-4'>
-            {/* plaidLink */}
+            <PlaidLink user={user} variant="primary"/>
           </div>
-        ):
-        (
+        {/* ):
+        ( */}
           <>
            <Form {...form}>
             <form 
@@ -226,8 +227,8 @@ const AuthForm = ({ type }: { type: string }) => {
             </Link>
           </footer>
           </>
-        )
-        }
+        {/* )
+        } */}
     </section>
   )
 }
