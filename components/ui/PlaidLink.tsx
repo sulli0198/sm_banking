@@ -2,21 +2,22 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Button } from './button'
 import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link';
 import { useRouter } from 'next/navigation';
+import { createLinkToken } from '@/lib/actions/user.actions';
 
 const PlaidLink = ({user, variant}: PlaidLinkProps) => {
 const router = useRouter();
 
-    const [token,settoken] = useState('');
+    const [token,setToken] = useState('');
     
     useEffect(() => {
         const getLinkToken = async () => {
-            // const data = await createLinkToken(user);
+            const data = await createLinkToken(user);
 
-            // setToken(data?.linkToken);
+            setToken(data?.linkToken);
         }
 
         getLinkToken()
-     }, [] )
+     }, [user] )
 
 
     const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string) => {
