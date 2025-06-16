@@ -2,10 +2,18 @@ import HeaderBox from '@/components/ui/HeaderBox'
 import React from 'react'
 import RightSidebar from '@/components/ui/RightSidebar'
 import { getLoggedInUser } from '@/lib/actions/user.actions'
+import { getAccount, getAccounts } from '@/lib/actions/bank.actions'
 
 const Home = async() => {
 
    const loggedin = await getLoggedInUser();
+   const accounts = await getAccounts({userId:loggedin.$id})
+
+   if(!accounts) return;
+
+   const appwriteItemId = accounts.data[0]?.appwriteItemId;
+   const account = await getAccount({appwriteItemId})
+
    console.log('loggedin user:', loggedin);
    
   return (
