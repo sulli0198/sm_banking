@@ -211,7 +211,7 @@
   }
 
   .view-all-btn {
-    @apply text-14 rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-700;
+    @apply text-14 rounded-lg border border-gray-500 px-4 py-2.5 font-semibold text-white;
   }
 
   .recent-transactions {
@@ -219,7 +219,7 @@
   }
 
   .recent-transactions-label {
-    @apply text-20 md:text-24 font-semibold text-gray-900;
+    @apply text-20 md:text-24 font-semibold text-white;
   }
 
   .recent-transactions-tablist {
