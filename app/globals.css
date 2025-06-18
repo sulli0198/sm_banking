@@ -223,7 +223,7 @@
   }
 
   .recent-transactions-tablist {
-    @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
+    @apply custom-scrollbar mb-8 flex w-full flex-nowrap bg-transparent ;
   }
 
   /* Right sidebar */
@@ -308,7 +308,7 @@
 
   /* Bank Info */
   .bank-info {
-    @apply gap-[18px] flex p-4 transition-all border bg-blue-25 border-transparent;
+    @apply gap-[18px] flex p-4 transition-all border bg-slate-700 border-transparent rounded-sm;
   }
 
   /* Category Badge */
@@ -317,7 +317,7 @@
   }
 
   .banktab-item {
-    @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
+    @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all ;
   }
 
   /* Mobile nav */
