@@ -8,7 +8,26 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
-import { formatAmount, getTransactionStatus } from '@/lib/utils'
+import { cn, formatAmount, getTransactionStatus, removeSpecialCharacters } from '@/lib/utils'
+import { transactionCategoryStyles } from '@/constants'
+
+const CategoryBadge = ({category}: CategoryBadgeProps) => {
+  const {
+    borderColor,
+    backgroundColor,
+    textColor,
+    chipBackgroundColor,
+  } = transactionCategoryStyles[category as keyof typeof transactionCategoryStyles] || transactionCategoryStyles.default
+
+  return (
+    <div className={cn('category-badge', borderColor, chipBackgroundColor)}>
+      <div className={cn('size-2 rounded-full', backgroundColor)} />
+      <p className={cn('text-[12px] font-medium', textColor)} >
+        {category}
+      </p>
+    </div>
+  )
+}
 
 const TransactionsTable = ({transactions}: TransactionTableProps) => {
   return (
@@ -24,33 +43,52 @@ const TransactionsTable = ({transactions}: TransactionTableProps) => {
     </TableRow>
   </TableHeader>
 
-  {transactions.map((t: Transaction) => {
-    const status = getTransactionStatus(new Date(t.date))
-    const amount = formatAmount(t.amount)
+  <TableBody>
+    {transactions.map((t: Transaction) => {
+      const status = getTransactionStatus(new Date(t.date))
+      const amount = formatAmount(t.amount)
 
-    const isDebit = t.type === 'debit';
-    const isCredit = t.type === 'credit';
+      const isDebit = t.type === 'debit'
+      const isCredit = t.type === 'credit'
 
-    return(
-    <TableRow key={t.id}>
-      <TableCell className="font-medium">
-        <div>
-            <h1>
-                {t.name}
-            </h1>
-        </div>
-      </TableCell>
-    </TableRow>
-    )
-  })}
-  {/* <TableBody>
-    <TableRow>
-      <TableCell className="font-medium">INV001</TableCell>
-      <TableCell>Paid</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell className="text-right">$250.00</TableCell>
-    </TableRow>
-  </TableBody> */}
+      return (
+        <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#362121]' : 'bg-[#2c3830]' } !over:bg-none !border-b-Default `}>
+          <TableCell className="max-w-[250px] pl-2 pr-10">
+            <div className="flex items-center gap-3">
+              <h1 className="text-14 truncate font-semibold text-white">
+                {removeSpecialCharacters(t.name)}
+              </h1>
+            </div>
+          </TableCell>
+
+          <TableCell
+            className={`pl-2 pr-10 font-semibold ${isDebit || amount[0] === '-' ? 
+              'text-[#f04438]'
+              : 'text-[#039855]'
+             }`}
+          >
+            {isDebit ? `-${amount}` : isCredit ? `+${amount}` : amount}
+          </TableCell>
+
+          <TableCell className="pl-2 pr-10">
+           <CategoryBadge category={status} /> 
+          </TableCell>
+
+          <TableCell className=" min-2-32 pl-2 pr-10">
+            {new Date(t.date).toLocaleDateString()}
+          </TableCell>
+
+          <TableCell className="pl-2 pr-10 capitalize max-md:hidden">
+            {t.paymentChannel}
+          </TableCell>
+
+          <TableCell className="pl-2 pr-10 max-md:hidden">
+            {t.category}
+          </TableCell>
+        </TableRow>
+      )
+    })}
+  </TableBody>
 </Table>
   )
 }

@@ -28,7 +28,8 @@ export const getUserInfo = async ({userId}: getUserInfoProps)=>{
 
     return parseStringify(user.documents[0]);
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return null;
   }
 }
 
@@ -52,6 +53,7 @@ export const signIn = async ( {email , password}: signInProps) => {
       return parseStringify(user);
     }catch(error){
         console.error('Error', error);
+        return null;
     }
 }
 
@@ -87,7 +89,7 @@ export const signUp = async ({password, ...userData}: SignUpParams) => {
         ID.unique(),
         {
           ...userData,
-          userid: newUserAccount.$id,
+          userId: newUserAccount.$id,
           dwollaCustomerId,
           dwollaCustomerUrl,
         }
@@ -106,6 +108,7 @@ export const signUp = async ({password, ...userData}: SignUpParams) => {
   return parseStringify(newUser);
     }catch(error){
         console.error('Error', error);
+        return null;
     }
 }
 
@@ -144,7 +147,7 @@ export async function getLoggedInUser() {
           client_user_id : user.$id
         },
         client_name: `${user.firstName} ${user.lastName}`, 
-        products: ['auth'] as Products[],
+        products: ['auth', 'transactions'] as Products[],
         language: 'en',
         country_codes: ['US'] as CountryCode[ ],
       }
